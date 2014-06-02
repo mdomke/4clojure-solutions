@@ -15,7 +15,7 @@ true
 
 ; Intro to Lists
 ; https://www.4clojure.com/problem/4
-:a :b :c 
+:a :b :c
 
 
 ; Lists: conj
@@ -216,3 +216,40 @@ true
 ; https://www.4clojure.com/problem/40
 (fn [sep coll] (rest (mapcat #(vector sep %) coll)))
 
+
+; Drop Every Nth Item
+; https://www.4clojure.com/problem/41
+(fn [coll n] (apply concat (partition-all (dec n) n coll)))
+
+
+; Factorial Fun
+; https://www.4clojure.com/problem/42
+(fn [n] (reduce * (range 1 (inc n))))
+
+
+; Reverse Interleave
+; https://www.4clojure.com/problem/43
+(fn [coll len]
+  (let [parts (map-indexed (fn [i e] (vector (mod i len) e)) coll)]
+    (vals (reduce
+            (fn [result elems]
+              (let [k (first elems) v (last elems)]
+                (assoc result k (conj (get result k []) v))))
+            (sorted-map) parts))))
+
+
+; Rotate Sequence
+; https://www.4clojure.com/problem/44
+(fn [dir coll]
+  (let [n (mod dir (count coll))]
+    (concat (drop n coll) (take n coll))))
+
+
+; Intro to Iterate
+; https://www.4clojure.com/problem/45
+'(1 4 7 10 13)'
+
+
+; Flipping Out
+; https://www.4clojure.com/problem/46
+(fn [func] (fn [a b] (func b a)))

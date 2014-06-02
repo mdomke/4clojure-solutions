@@ -253,3 +253,33 @@ true
 ; Flipping Out
 ; https://www.4clojure.com/problem/46
 (fn [func] (fn [a b] (func b a)))
+
+
+; Contain Yourself
+; https://www.4clojure.com/problem/47
+4
+
+
+; Intro to Some
+; https://www.4clojure.com/problem/48
+6
+
+
+; Split a Sequence
+; https://www.4clojure.com/problem/49
+(fn [n coll] (vector (take n coll) (drop n coll)))
+
+
+; Split by Type
+; https://www.4clojure.com/problem/50
+(fn [coll]
+  (vals
+    (reduce
+      (fn [result elem]
+        (let [key (type elem) value (get result key [])]
+          (assoc result key (conj value elem)))) {} coll)))
+
+
+; Split by Type (group-by)
+; https://www.4clojure.com/problem/50
+#(vec (vals (group-by type %)))
